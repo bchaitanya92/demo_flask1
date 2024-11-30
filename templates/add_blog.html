@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Blog | Add Blog {% endblock %}
+
+{% block content %}
+<h1>Add a New Blog</h1>
+<form method="POST">
+    <label for="author_name">Author Name:</label><br>
+    <input type="text" id="author_name" name="author_name" required><br><br>
+    <label for="author_email">Author Email:</label><br>
+    <input type="email" id="author_email" name="author_email" required><br><br>
+    <label for="blog_title">Blog Title:</label><br>
+    <input type="text" id="blog_title" name="blog_title" required><br><br>
+    <label for="blog_content">Blog Content:</label><br>
+    <textarea id="blog_content" name="blog_content" required></textarea><br><br>
+    <label for="blog_date">Date (DD-MM-YYYY):</label><br>
+    <input type="text" id="blog_date" name="blog_date" required><br><br>
+    <button type="submit">Submit</button>
+</form>
+<a href="/">Back to Home</a>
+{% endblock %}
