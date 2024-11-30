@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from utils.db import db
-from models.blog import Author, Blog
+from models.blog import Blog, Author
 
 flask_app = Flask(__name__)
 flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
@@ -27,15 +27,13 @@ def blogs():
 def add_blog():
     if request.method == 'POST':
         author_name = request.form['author_name']
-        author_email = request.form['author_email']
         blog_title = request.form['blog_title']
         blog_content = request.form['blog_content']
         blog_date = request.form['blog_date']
 
-
-        author = Author.query.filter_by(email=author_email).first()
+        author = Author.query.filter_by(name=author_name).first()
         if not author:
-            author = Author(name=author_name, email=author_email)
+            author = Author(name=author_name)
             db.session.add(author)
             db.session.commit()
 
@@ -52,9 +50,6 @@ def add_blog():
 
     return render_template('add_blog.html')
 
+
 if __name__ == '__main__':
-    flask_app.run(
-        host='127.0.0.1',
-        port=8006,
-        debug=True
-    )
+    flask_app.run(host='127.0.0.1', port=8004, debug=True)
